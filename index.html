@@ -15,7 +15,7 @@ nav{display:flex;gap:22px;color:#ddd;font-size:14px}
 nav a{color:inherit;text-decoration:none}
 nav a:hover{color:#e50914}
 .search{background:#202020;border:1px solid #444;color:white;padding:10px 14px;border-radius:6px;width:180px}
-.hero{min-height:420px;padding:90px 7% 65px;background:linear-gradient(90deg,#090909 5%,rgba(9,9,9,.85) 42%,rgba(9,9,9,.15)),linear-gradient(0deg,#090909,transparent 60%),url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1600&q=80')}
+.hero{min-height:420px;padding:90px 7% 65px;background:linear-gradient(90deg,#090909 5%,rgba(9,9,9,.85) 42%,rgba(9,9,9,.15)),linear-gradient(0deg,#090909,transparent 60%),url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center}
 .tag{color:#e50914;font-size:12px;font-weight:bold;letter-spacing:3px}
 .hero h1{font-size:clamp(38px,7vw,68px);margin:15px 0}
 .hero p{max-width:470px;color:#ddd;line-height:1.7;font-size:15px}
@@ -203,64 +203,128 @@ footer{text-align:center;padding:30px;color:#777;border-top:1px solid #222;font-
 
 <script>
 const movies = [
- {id:1,title:"The Dark Horizon",category:"Action",year:"2025",image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500"},
- {id:2,title:"Beyond The Stars",category:"Sci-Fi",year:"2025",image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=500"},
- {id:3,title:"Wild Adventure",category:"Adventure",year:"2024",image:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=500"},
- {id:4,title:"City Lights",category:"Drama",year:"2024",image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=500"},
- {id:5,title:"Funny Business",category:"Comedy",year:"2025",image:"https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500"},
- {id:6,title:"The Last Mission",category:"Action",year:"2023",image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=500"},
- {id:7,title:"Space Unknown",category:"Sci-Fi",year:"2024",image:"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=500"},
- {id:8,title:"Lost Paradise",category:"Adventure",year:"2023",image:"https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=500"}
+ {
+  id:1,
+  title:"The Dark Horizon",
+  category:"Action",
+  year:"2025",
+  rating:"8.5/10",
+  description:"An exciting fictional action adventure.",
+  image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500"
+ },
+ {
+  id:2,
+  title:"Beyond The Stars",
+  category:"Sci-Fi",
+  year:"2025",
+  rating:"9/10",
+  description:"Explore a mysterious universe beyond imagination.",
+  image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=500"
+ },
+ {
+  id:3,
+  title:"Wild Adventure",
+  category:"Adventure",
+  year:"2024",
+  rating:"8/10",
+  description:"Discover beautiful landscapes and hidden worlds.",
+  image:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=500"
+ },
+ {
+  id:4,
+  title:"City Lights",
+  category:"Drama",
+  year:"2024",
+  rating:"8.2/10",
+  description:"A fictional story about life in a busy city.",
+  image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=500"
+ },
+ {
+  id:5,
+  title:"Funny Business",
+  category:"Comedy",
+  year:"2025",
+  rating:"7.8/10",
+  description:"A lighthearted fictional comedy.",
+  image:"https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500"
+ },
+ {
+  id:6,
+  title:"The Last Mission",
+  category:"Action",
+  year:"2023",
+  rating:"8.4/10",
+  description:"An action-packed fictional mission.",
+  image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=500"
+ },
+ {
+  id:7,
+  title:"Space Unknown",
+  category:"Sci-Fi",
+  year:"2024",
+  rating:"8.7/10",
+  description:"A journey through the unknown universe.",
+  image:"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=500"
+ },
+ {
+  id:8,
+  title:"Lost Paradise",
+  category:"Adventure",
+  year:"2023",
+  rating:"8.1/10",
+  description:"An adventure through extraordinary places.",
+  image:"https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=500"
+ }
 ];
 
 let category="All";
 let saved=[];
 
 function card(movie){
- return `<article class="movie">
- <img class="poster" src="${movie.image}" alt="${movie.title}" loading="lazy">
- <div class="info">
- <h3>${movie.title}</h3>
- <div class="meta">
- ${movie.category} · ${movie.year}
- </div>
- <div style="color:#f5c518;margin-bottom:10px">
- ⭐ ${movie.rating || "Not rated"}
- </div>
- <button onclick="showDetails(${movie.id})">
- View Details
- </button>
- <button style="margin-top:7px"
- onclick="toggleSave(${movie.id})">
- ${saved.includes(movie.id)?"♥ Saved":"＋ My List"}
- </button>
- </div>
- </article>`;
+  return `<article class="movie">
+  <img class="poster" src="${movie.image}" alt="${movie.title}" loading="lazy">
+  <div class="info">
+  <h3>${movie.title}</h3>
+  <div class="meta">
+  ${movie.category} · ${movie.year}
+  </div>
+  <div style="color:#f5c518;margin-bottom:10px">
+  ⭐ ${movie.rating || "Not rated"}
+  </div>
+  <button onclick="showDetails(${movie.id})">
+  View Details
+  </button>
+  <button style="margin-top:7px"
+  onclick="toggleSave(${movie.id})">
+  ${saved.includes(movie.id)?"♥ Saved":"＋ My List"}
+  </button>
+  </div>
+  </article>`;
 }
 
 function showDetails(id){
- const movie=movies.find(m=>m.id===id);
- if(!movie)return;
+  const movie=movies.find(m=>m.id===id);
+  if(!movie)return;
 
- document.getElementById("playerTitle").textContent=movie.title;
- document.getElementById("player").style.display="flex";
- document.getElementById("movieFrame").src="";
+  document.getElementById("playerTitle").textContent=movie.title;
+  document.getElementById("player").style.display="flex";
+  document.getElementById("movieFrame").src="";
 }
 
 function render(){
-  const term=document.getElementById("search").value.toLowerCase();
-  const filtered=movies.filter(m=>
-  (category==="All"||m.category===category)&&
-  m.title.toLowerCase().includes(term)
-  );
-  document.getElementById("movieGrid").innerHTML=
-  filtered.length?filtered.map(card).join(''):
-  '<p class="empty">No movies found.</p>';
+   const term=document.getElementById("search").value.toLowerCase();
+   const filtered=movies.filter(m=>
+   (category==="All"||m.category===category)&&
+   m.title.toLowerCase().includes(term)
+   );
+   document.getElementById("movieGrid").innerHTML=
+   filtered.length?filtered.map(card).join(''):
+   '<p class="empty">No movies found.</p>';
 
-  const favourites=movies.filter(m=>saved.includes(m.id));
-  document.getElementById("savedGrid").innerHTML=
-  favourites.length?favourites.map(card).join(''):
-  '<p class="empty">Your saved movies will appear here.</p>';
+   const favourites=movies.filter(m=>saved.includes(m.id));
+   document.getElementById("savedGrid").innerHTML=
+   favourites.length?favourites.map(card).join(''):
+   '<p class="empty">Your saved movies will appear here.</p>';
 }
 
 function toggleSave(id){
@@ -279,34 +343,34 @@ function closePlayer(){
 document.getElementById("search").addEventListener("input",render);
 document.querySelectorAll(".filter").forEach(button=>{
   button.addEventListener("click",()=>{
-   category=button.dataset.category;
-   document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
-   button.classList.add("active");
-   render();
+    category=button.dataset.category;
+    document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+    button.classList.add("active");
+    render();
   });
 });
 
 const extraLibraries = {
- seriesGrid: [
-  {title:"The Silent World",category:"Drama",year:"2025",image:"https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500"},
-  {title:"Hidden Stories",category:"Mystery",year:"2024",image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=500"}
- ],
- animeGrid: [
-  {title:"Anime Universe",category:"Animation",year:"2025",image:"https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500"},
-  {title:"Dream World",category:"Anime",year:"2024",image:"https://images.unsplash.com/photo-1614583225154-5fcdda07019e?w=500"}
- ],
- asianGrid: [
-  {title:"Seoul Stories",category:"K-Drama",year:"2025",image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=500"},
-  {title:"Asian Horizons",category:"Drama",year:"2024",image:"https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500"}
- ],
- docsGrid: [
-  {title:"Planet Earth",category:"Nature",year:"2025",image:"https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=500"},
-  {title:"The Universe",category:"Science",year:"2024",image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=500"}
- ],
- trailersGrid: [
-  {title:"Action Preview",category:"Trailer",year:"2025",image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500"},
-  {title:"Adventure Preview",category:"Trailer",year:"2025",image:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=500"}
- ]
+  seriesGrid: [
+   {title:"The Silent World",category:"Drama",year:"2025",image:"https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500"},
+   {title:"Hidden Stories",category:"Mystery",year:"2024",image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=500"}
+  ],
+  animeGrid: [
+   {title:"Anime Universe",category:"Animation",year:"2025",image:"https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500"},
+   {title:"Dream World",category:"Anime",year:"2024",image:"https://images.unsplash.com/photo-1614583225154-5fcdda07019e?w=500"}
+  ],
+  asianGrid: [
+   {title:"Seoul Stories",category:"K-Drama",year:"2025",image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=500"},
+   {title:"Asian Horizons",category:"Drama",year:"2024",image:"https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500"}
+  ],
+  docsGrid: [
+   {title:"Planet Earth",category:"Nature",year:"2025",image:"https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=500"},
+   {title:"The Universe",category:"Science",year:"2024",image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=500"}
+  ],
+  trailersGrid: [
+   {title:"Action Preview",category:"Trailer",year:"2025",image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500"},
+   {title:"Adventure Preview",category:"Trailer",year:"2025",image:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=500"}
+  ]
 };
 
 Object.entries(extraLibraries).forEach(([id,items])=>{
