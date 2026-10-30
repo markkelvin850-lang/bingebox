@@ -144,9 +144,32 @@ footer{text-align:center;padding:30px;color:#777;border-top:1px solid #222;font-
 <div id="player">
   <div class="playerbox">
     <button class="close" onclick="closePlayer()">×</button>
-    <h2 id="playerTitle">Coming soon</h2>
-    <p>Our movie player is being prepared. In the next stage, we'll connect legally free movies you can watch online.</p>
-    <button class="btn primary" onclick="closePlayer()">Got it</button>
+
+    <div id="movieDetails">
+      <img id="detailPoster" class="poster"
+        style="height:260px;border-radius:8px">
+
+      <h2 id="detailTitle">Movie Title</h2>
+
+      <p id="detailMeta" class="meta"></p>
+
+      <p id="detailDescription"
+        style="color:#ddd;line-height:1.7;margin:15px 0">
+      </p>
+
+      <button class="btn primary" onclick="playSelectedMovie()">
+        ▶ Watch Now
+      </button>
+    </div>
+
+    <div id="videoArea" style="display:none">
+      <h2 id="playerTitle">Now Playing</h2>
+      <iframe id="movieFrame"
+        width="100%" height="250"
+        allowfullscreen
+        style="border:0;background:black">
+      </iframe>
+    </div>
   </div>
 </div>
 
@@ -279,6 +302,7 @@ const movies = [
 
 let category="All";
 let saved=[];
+let selectedMovie = null;
 
 function card(movie){
   return `<article class="movie">
@@ -303,12 +327,30 @@ function card(movie){
 }
 
 function showDetails(id){
-  const movie=movies.find(m=>m.id===id);
-  if(!movie)return;
+  const movie = movies.find(m => m.id === id);
+  if(!movie) return;
 
-  document.getElementById("playerTitle").textContent=movie.title;
-  document.getElementById("player").style.display="flex";
-  document.getElementById("movieFrame").src="";
+  selectedMovie = movie;
+
+  document.getElementById("detailPoster").src = movie.image;
+  document.getElementById("detailTitle").textContent = movie.title;
+  document.getElementById("detailMeta").textContent =
+    movie.category + " · " + movie.year + " · ⭐ " + movie.rating;
+
+  document.getElementById("detailDescription").textContent =
+    movie.description || "Description coming soon.";
+
+  document.getElementById("movieDetails").style.display = "block";
+  document.getElementById("videoArea").style.display = "none";
+  document.getElementById("movieFrame").src = "";
+
+  document.getElementById("player").style.display = "flex";
+}
+
+function playSelectedMovie(){
+  if(!selectedMovie) return;
+
+  showPlayer(selectedMovie.title);
 }
 
 function render(){
@@ -334,6 +376,8 @@ function toggleSave(id){
 
 function showPlayer(title){
   document.getElementById("playerTitle").textContent=title;
+  document.getElementById("movieDetails").style.display = "none";
+  document.getElementById("videoArea").style.display = "block";
   document.getElementById("player").style.display="flex";
 }
 function closePlayer(){
