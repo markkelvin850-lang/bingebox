@@ -233,7 +233,8 @@ const movies = [
   year:"2025",
   rating:"8.5/10",
   description:"An exciting fictional action adventure.",
-  image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500"
+  image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500",
+  trailer:"https://www.youtube.com/embed/aqz-KE-bpKQ?autoplay=1"
  },
  {
   id:2,
@@ -242,7 +243,8 @@ const movies = [
   year:"2025",
   rating:"9/10",
   description:"Explore a mysterious universe beyond imagination.",
-  image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=500"
+  image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=500",
+  trailer:"https://www.youtube.com/embed/ysz5S6PUM-U?autoplay=1"
  },
  {
   id:3,
@@ -251,7 +253,8 @@ const movies = [
   year:"2024",
   rating:"8/10",
   description:"Discover beautiful landscapes and hidden worlds.",
-  image:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=500"
+  image:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=500",
+  trailer:"https://www.youtube.com/embed/ScMzIvxBSi4?autoplay=1"
  },
  {
   id:4,
@@ -260,7 +263,8 @@ const movies = [
   year:"2024",
   rating:"8.2/10",
   description:"A fictional story about life in a busy city.",
-  image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=500"
+  image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=500",
+  trailer:"https://www.youtube.com/embed/ysz5S6PUM-U?autoplay=1"
  },
  {
   id:5,
@@ -269,7 +273,8 @@ const movies = [
   year:"2025",
   rating:"7.8/10",
   description:"A lighthearted fictional comedy.",
-  image:"https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500"
+  image:"https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500",
+  trailer:"https://www.youtube.com/embed/aqz-KE-bpKQ?autoplay=1"
  },
  {
   id:6,
@@ -278,7 +283,8 @@ const movies = [
   year:"2023",
   rating:"8.4/10",
   description:"An action-packed fictional mission.",
-  image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=500"
+  image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=500",
+  trailer:"https://www.youtube.com/embed/ScMzIvxBSi4?autoplay=1"
  },
  {
   id:7,
@@ -287,7 +293,8 @@ const movies = [
   year:"2024",
   rating:"8.7/10",
   description:"A journey through the unknown universe.",
-  image:"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=500"
+  image:"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=500",
+  trailer:"https://www.youtube.com/embed/ysz5S6PUM-U?autoplay=1"
  },
  {
   id:8,
@@ -296,7 +303,8 @@ const movies = [
   year:"2023",
   rating:"8.1/10",
   description:"An adventure through extraordinary places.",
-  image:"https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=500"
+  image:"https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=500",
+  trailer:"https://www.youtube.com/embed/aqz-KE-bpKQ?autoplay=1"
  }
 ];
 
@@ -350,7 +358,7 @@ function showDetails(id){
 function playSelectedMovie(){
   if(!selectedMovie) return;
 
-  showPlayer(selectedMovie.title);
+  showPlayer(selectedMovie.title, selectedMovie.trailer);
 }
 
 function render(){
@@ -374,14 +382,17 @@ function toggleSave(id){
   render();
 }
 
-function showPlayer(title){
-  document.getElementById("playerTitle").textContent=title;
+function showPlayer(title, trailer = ""){
+  document.getElementById("playerTitle").textContent = title;
   document.getElementById("movieDetails").style.display = "none";
   document.getElementById("videoArea").style.display = "block";
-  document.getElementById("player").style.display="flex";
+  document.getElementById("movieFrame").src = trailer || "";
+  document.getElementById("player").style.display = "flex";
 }
+
 function closePlayer(){
   document.getElementById("player").style.display="none";
+  document.getElementById("movieFrame").src = "";
 }
 
 document.getElementById("search").addEventListener("input",render);
